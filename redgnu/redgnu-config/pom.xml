@@ -5,6 +5,7 @@
     <artifactId>redgnu-parent</artifactId>
     <groupId>com.swieghelm</groupId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>redgnu-config</artifactId>
