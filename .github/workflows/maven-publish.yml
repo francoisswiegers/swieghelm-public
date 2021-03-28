@@ -23,6 +23,6 @@ jobs:
       run: mvn -B install --file redgnu/pom.xml -s $GITHUB_WORKSPACE/settings.xml
 
     - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy --file redgnu/pom.xml -s $GITHUB_WORKSPACE/settings.xml
+      run: mvn install deploy --file redgnu/pom.xml -s $GITHUB_WORKSPACE/settings.xml -DskipTests
       env:
         GITHUB_TOKEN: ${{ github.token }}
