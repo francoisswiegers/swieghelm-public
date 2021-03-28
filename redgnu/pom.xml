@@ -22,17 +22,9 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/swieghelm-public</url>
+            <url>https://maven.pkg.github.com/francoisswiegers/swieghelm-public</url>
         </repository>
     </distributionManagement>
-
-    <!--distributionManagement>
-        <repository>
-            <id>redgnu-snapshots</id>
-            <name>redgnu-snapshots</name>
-            <url>http://localhost:8081/repository/redgnu-snapshots/</url>
-        </repository>
-    </distributionManagement-->
 
     <build>
         <pluginManagement>
