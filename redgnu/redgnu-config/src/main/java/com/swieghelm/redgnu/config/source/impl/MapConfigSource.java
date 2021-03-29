@@ -15,7 +15,7 @@ public class MapConfigSource implements ConfigSource {
     }
 
     @Override
-    public Optional<String> getConfiguredValue(final String key) {
-        return Optional.ofNullable(configItems.get(key));
+    public Object getConfiguredValue(final String key) {
+        return configItems.get(key);
     }
 }
