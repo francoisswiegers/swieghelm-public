@@ -4,6 +4,6 @@ import java.util.Optional;
 
 public interface ConfigSource {
 
-    Optional<String> getConfiguredValue(String key);
+    Object getConfiguredValue(String key);
 
 }
