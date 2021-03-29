@@ -2,7 +2,7 @@ package com.swieghelm.redgnu.config.convert.common;
 
 import com.google.inject.TypeLiteral;
 import com.swieghelm.redgnu.config.convert.TypeConversion;
-import com.swieghelm.redgnu.config.convert.exception.ConvertionNotFoundException;
+import com.swieghelm.redgnu.config.convert.exception.ConversionNotFoundException;
 import com.swieghelm.redgnu.config.convert.exception.TypeConversionFailure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,10 +37,6 @@ public class SimpleJavaStandardTypeConversions implements TypeConversion {
     public Object convert(final Object raw,
                           final TypeLiteral<?> targetType) {
 
-        if (raw == null) {
-            return null;
-        }
-
         final Function<Object, Object> converter = CONVERTERS.get(targetType);
         if (converter != null) {
             LOG.debug("Trying: {}", converter);
@@ -54,7 +50,7 @@ public class SimpleJavaStandardTypeConversions implements TypeConversion {
         }
 
         LOG.debug("Did not find any converters for {} to {} in {}", raw, targetType, this);
-        throw new ConvertionNotFoundException(this, raw, targetType);
+        throw new ConversionNotFoundException(this, raw, targetType);
     }
 
     @Override

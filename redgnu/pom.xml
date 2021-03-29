@@ -16,8 +16,10 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <slf4j.version>1.7.30</slf4j.version>
         <guice.version>5.0.1</guice.version>
+        <reflections.version>0.9.12</reflections.version>
         <junit.version>5.7.1</junit.version>
         <hamcrest.version>2.2</hamcrest.version>
+        <log4j.version>2.14.1</log4j.version>
     </properties>
 
     <distributionManagement>
@@ -72,6 +74,13 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>${reflections.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -96,6 +105,22 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
 
     <modules>

@@ -1,4 +1,4 @@
-package com.swieghelm.redgnu.config.inject.discovery;
+package com.swieghelm.redgnu.config.discovery;
 
 import com.google.inject.TypeLiteral;
 
@@ -11,7 +11,7 @@ public class ParameterInjectionCandidate implements InjectionCandidate {
     private final Parameter parameter;
     private final TypeLiteral<?> type;
 
-    ParameterInjectionCandidate(final Parameter parameter) {
+    public ParameterInjectionCandidate(final Parameter parameter) {
         this.parameter = parameter;
         this.type = TypeLiteral.get(parameter.getParameterizedType());
     }

@@ -1,4 +1,4 @@
-package com.swieghelm.redgnu.config.inject.discovery;
+package com.swieghelm.redgnu.config.discovery;
 
 import com.swieghelm.redgnu.config.inject.ConfigDescription;
 

@@ -4,13 +4,13 @@ import com.google.inject.TypeLiteral;
 import com.swieghelm.redgnu.config.ConfigException;
 import com.swieghelm.redgnu.config.convert.TypeConversion;
 
-public class ConvertionNotFoundException extends ConfigException {
+public class ConversionNotFoundException extends ConfigException {
 
     private final TypeConversion typeConversion;
     private final Object rawValue;
     private final TypeLiteral<?> targetType;
 
-    public ConvertionNotFoundException(final TypeConversion typeConversion,
+    public ConversionNotFoundException(final TypeConversion typeConversion,
                                        final Object rawValue,
                                        final TypeLiteral<?> targetType) {
         super("Could not find a conversion for " + rawValue + " to " + targetType + " in " + typeConversion);

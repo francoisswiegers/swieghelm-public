@@ -1,7 +1,8 @@
-package com.swieghelm.redgnu.config.inject.discovery;
+package com.swieghelm.redgnu.config.discovery;
 
 import com.google.inject.TypeLiteral;
-import com.swieghelm.redgnu.config.inject.annotation.Config;
+import com.swieghelm.redgnu.config.discovery.ParameterInjectionCandidate;
+import com.swieghelm.redgnu.config.extension.vanilla.Config;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Constructor;
