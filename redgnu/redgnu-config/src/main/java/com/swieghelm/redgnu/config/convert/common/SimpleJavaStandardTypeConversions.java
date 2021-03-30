@@ -24,12 +24,19 @@ public class SimpleJavaStandardTypeConversions implements TypeConversion {
     static {
         CONVERTERS.put(TypeLiteral.get(String.class), Object::toString);
         CONVERTERS.put(TypeLiteral.get(Byte.class), raw -> Byte.valueOf(raw.toString()));
+        CONVERTERS.put(TypeLiteral.get(Byte.TYPE), raw -> Byte.valueOf(raw.toString()));
         CONVERTERS.put(TypeLiteral.get(Short.class), raw -> Short.valueOf(raw.toString()));
+        CONVERTERS.put(TypeLiteral.get(Short.TYPE), raw -> Short.valueOf(raw.toString()));
         CONVERTERS.put(TypeLiteral.get(Boolean.class), raw -> Boolean.valueOf(raw.toString()));
+        CONVERTERS.put(TypeLiteral.get(Boolean.TYPE), raw -> Boolean.valueOf(raw.toString()));
         CONVERTERS.put(TypeLiteral.get(Integer.class), raw -> Integer.valueOf(raw.toString()));
+        CONVERTERS.put(TypeLiteral.get(Integer.TYPE), raw -> Integer.valueOf(raw.toString()));
         CONVERTERS.put(TypeLiteral.get(Long.class), raw -> Long.valueOf(raw.toString()));
+        CONVERTERS.put(TypeLiteral.get(Long.TYPE), raw -> Long.valueOf(raw.toString()));
         CONVERTERS.put(TypeLiteral.get(Float.class), raw -> Float.valueOf(raw.toString()));
+        CONVERTERS.put(TypeLiteral.get(Float.TYPE), raw -> Float.valueOf(raw.toString()));
         CONVERTERS.put(TypeLiteral.get(Double.class), raw -> Double.valueOf(raw.toString()));
+        CONVERTERS.put(TypeLiteral.get(Double.TYPE), raw -> Double.valueOf(raw.toString()));
         CONVERTERS.put(TypeLiteral.get(BigDecimal.class), raw -> new BigDecimal(raw.toString()));
     }
 
@@ -39,7 +46,7 @@ public class SimpleJavaStandardTypeConversions implements TypeConversion {
 
         final Function<Object, Object> converter = CONVERTERS.get(targetType);
         if (converter != null) {
-            LOG.debug("Trying: {}", converter);
+            LOG.trace("Trying: {}", converter);
             try {
                 return converter.apply(raw);
             }

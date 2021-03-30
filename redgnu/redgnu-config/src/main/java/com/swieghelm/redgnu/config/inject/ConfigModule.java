@@ -5,6 +5,7 @@ import com.google.inject.Inject;
 import com.google.inject.TypeLiteral;
 import com.swieghelm.redgnu.config.convert.exception.ConversionNotFoundException;
 import com.swieghelm.redgnu.config.discovery.ParameterInjectionCandidate;
+import com.swieghelm.redgnu.config.type.OptionalUtil;
 import org.reflections.Reflections;
 import org.reflections.scanners.MethodAnnotationsScanner;
 import org.slf4j.Logger;
@@ -14,6 +15,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Parameter;
 import java.util.*;
+
+import static com.swieghelm.redgnu.config.type.OptionalUtil.getConversionType;
+import static com.swieghelm.redgnu.config.type.OptionalUtil.isOptional;
 
 public class ConfigModule extends AbstractModule {
 
@@ -28,11 +32,9 @@ public class ConfigModule extends AbstractModule {
     @Override
     protected void configure() {
         final Map<BindingKey, Object> boundValues = new HashMap<>();
-        final Reflections reflections = new Reflections(config.getReflections().getConfiguration(),
-                new MethodAnnotationsScanner());
         final Set<Constructor> injectingConstructors = new HashSet<>();
-        injectingConstructors.addAll(reflections.getConstructorsAnnotatedWith(Inject.class));
-        injectingConstructors.addAll(reflections.getConstructorsAnnotatedWith(javax.inject.Inject.class));
+        injectingConstructors.addAll(config.getReflections().getConstructorsAnnotatedWith(Inject.class));
+        injectingConstructors.addAll(config.getReflections().getConstructorsAnnotatedWith(javax.inject.Inject.class));
 
         for (final Constructor<?> constructor : injectingConstructors) {
             for (final Parameter parameter : constructor.getParameters()) {
@@ -44,11 +46,13 @@ public class ConfigModule extends AbstractModule {
                     final Object configuredValue = config.getConfigSource().getConfiguredValue(key);
                     final Object valueToBind = configuredValue != null ? configuredValue : defaultValue;
                     final TypeLiteral<?> targetType = injectionCandidate.getTargetType();
+                    final TypeLiteral<?> conversionTargetType = getConversionType(targetType);
+
                     final Annotation annotation = configDescription.getBindingAnnotation();
                     try {
                         final BindingKey bindingKey = new BindingKey(targetType, annotation);
                         final Object convertedValue = valueToBind != null ?
-                                config.getTypeConversion().convert(valueToBind, targetType) :
+                                config.getTypeConversion().convert(valueToBind, conversionTargetType) :
                                 null;
                         final Object boundValue = boundValues.get(bindingKey);
                         if (boundValue != null) {
@@ -62,7 +66,7 @@ public class ConfigModule extends AbstractModule {
                         }
                         else {
                             if (convertedValue == null) {
-                                if (Optional.class.equals(targetType.getRawType())) {
+                                if (isOptional(targetType)) {
                                     bind((TypeLiteral<Optional>) targetType)
                                             .annotatedWith(annotation)
                                             .toInstance(Optional.empty());
@@ -73,13 +77,12 @@ public class ConfigModule extends AbstractModule {
                                 }
                             }
                             else {
-                                if (Optional.class.equals(targetType.getRawType())) {
+                                if (isOptional(targetType)) {
                                     bind((TypeLiteral<Optional>) targetType)
                                             .annotatedWith(annotation)
                                             .toInstance(Optional.of(convertedValue));
                                 }
                                 else {
-                                    LOG.error("Cannot inject null value into non-Optional {}");
                                     bind((TypeLiteral<Object>) targetType)
                                             .annotatedWith(annotation)
                                             .toInstance(convertedValue);

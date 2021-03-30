@@ -10,10 +10,15 @@ import com.swieghelm.redgnu.config.inject.ConfigModule;
 import com.swieghelm.redgnu.config.source.impl.MapConfigSource;
 import org.junit.jupiter.api.Test;
 import org.reflections.Reflections;
+import org.reflections.scanners.MethodAnnotationsScanner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -30,7 +35,8 @@ public class SimpleInjectionsTest {
                 ConfigModule.newBuilder()
                             .setConfigSource(new MapConfigSource(configs))
                             .setDescriptionDiscovery(new DefaultDescriptionDiscovery())
-                            .setReflections(new Reflections(getClass().getPackage().getName()))
+                            .setReflections(new Reflections(getClass().getPackage().getName(),
+                                    new MethodAnnotationsScanner()))
                             .setTypeConversion(new SimpleJavaStandardTypeConversions())
                             .build());
 
