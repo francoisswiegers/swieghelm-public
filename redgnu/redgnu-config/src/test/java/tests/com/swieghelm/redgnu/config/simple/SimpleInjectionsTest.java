@@ -4,13 +4,12 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.swieghelm.redgnu.config.convert.common.SimpleJavaStandardTypeConversions;
+import com.swieghelm.redgnu.config.discovery.reflections.ReflectionsInjectionDiscovery;
 import com.swieghelm.redgnu.config.extension.vanilla.Config;
 import com.swieghelm.redgnu.config.extension.vanilla.DefaultDescriptionDiscovery;
 import com.swieghelm.redgnu.config.inject.ConfigModule;
 import com.swieghelm.redgnu.config.source.impl.MapConfigSource;
 import org.junit.jupiter.api.Test;
-import org.reflections.Reflections;
-import org.reflections.scanners.MethodAnnotationsScanner;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +21,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class SimpleInjectionsTest {
 
     @Test
-    public void mustInjectSimpleValues() throws Exception {
+    public void mustInjectScalarValues() throws Exception {
         final Map<String, String> configs = new HashMap<>();
         configs.put("string_config", "testValue");
         configs.put("double_config", "20.00");
@@ -30,9 +29,9 @@ public class SimpleInjectionsTest {
         final Injector injector = Guice.createInjector(
                 ConfigModule.newBuilder()
                             .setConfigSource(new MapConfigSource(configs))
-                            .setDescriptionDiscovery(new DefaultDescriptionDiscovery())
-                            .setReflections(new Reflections(getClass().getPackage().getName(),
-                                    new MethodAnnotationsScanner()))
+                            .setDiscovery(new ReflectionsInjectionDiscovery(
+                                    getClass().getPackage(),
+                                    new DefaultDescriptionDiscovery()))
                             .setTypeConversion(new SimpleJavaStandardTypeConversions())
                             .build());
 
