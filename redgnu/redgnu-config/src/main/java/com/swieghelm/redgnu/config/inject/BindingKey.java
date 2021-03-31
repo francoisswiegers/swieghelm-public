@@ -16,6 +16,14 @@ public class BindingKey {
         this.annotation = annotation;
     }
 
+    public TypeLiteral<?> getTargetType() {
+        return targetType;
+    }
+
+    public Annotation getAnnotation() {
+        return annotation;
+    }
+
     @Override
     public boolean equals(final Object obj) {
         return obj == this || (obj instanceof BindingKey && isEqual((BindingKey)obj));
