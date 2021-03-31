@@ -14,11 +14,9 @@ import org.slf4j.LoggerFactory;
 import java.lang.annotation.Annotation;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import static com.google.common.base.Verify.verifyNotNull;
 import static com.swieghelm.redgnu.config.type.OptionalUtil.getConversionType;
-import static com.swieghelm.redgnu.config.type.OptionalUtil.isOptional;
 
 public class ConfigModule extends AbstractModule {
 

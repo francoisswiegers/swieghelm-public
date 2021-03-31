@@ -34,7 +34,7 @@ public class BindingValue<T> {
                       .toInstance(Optional.empty());
             }
             else {
-                LOG.error("Cannot inject null value into non-Optional {}");
+                LOG.error("Cannot inject null value into non-Optional {}", bindingKey);
                 // TODO Add to error log
             }
         }
@@ -54,7 +54,7 @@ public class BindingValue<T> {
 
     public void validate(final Object otherValue) {
         if (!Objects.equals(value, otherValue)) {
-            LOG.error("{} already has previously bound value of {}", bindingKey, value);
+            LOG.error("{} already bound to {}", bindingKey, value);
             // TODO Add to error log
         }
         else {
