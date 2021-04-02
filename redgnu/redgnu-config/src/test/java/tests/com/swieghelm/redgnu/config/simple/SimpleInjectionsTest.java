@@ -3,7 +3,7 @@ package tests.com.swieghelm.redgnu.config.simple;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.swieghelm.redgnu.config.convert.common.SimpleJavaStandardTypeConversions;
+import com.swieghelm.redgnu.config.convert.common.JavaStandardScalarConversions;
 import com.swieghelm.redgnu.config.discovery.reflections.ReflectionsInjectionDiscovery;
 import com.swieghelm.redgnu.config.extension.vanilla.Config;
 import com.swieghelm.redgnu.config.extension.vanilla.DefaultDescriptionDiscovery;
@@ -32,7 +32,7 @@ public class SimpleInjectionsTest {
                             .setDiscovery(new ReflectionsInjectionDiscovery(
                                     getClass().getPackage(),
                                     new DefaultDescriptionDiscovery()))
-                            .setTypeConversion(new SimpleJavaStandardTypeConversions())
+                            .setTypeConversion(new JavaStandardScalarConversions())
                             .build());
 
         final ConfiguredType configuredType = injector.getInstance(ConfiguredType.class);

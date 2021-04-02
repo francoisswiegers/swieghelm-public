@@ -2,6 +2,7 @@ package com.swieghelm.redgnu.config.ext.yaml;
 
 import com.swieghelm.redgnu.config.source.ConfigSource;
 import org.snakeyaml.engine.v2.api.Load;
+import org.snakeyaml.engine.v2.api.LoadSettings;
 
 import java.io.InputStream;
 import java.util.Map;
@@ -9,6 +10,10 @@ import java.util.Map;
 public class YamlSource implements ConfigSource {
 
     private final Map<String, Object> document;
+
+    public YamlSource(final InputStream inputStream) {
+        this(new Load(LoadSettings.builder().build()), inputStream);
+    }
 
     public YamlSource(final Load load,
                       final InputStream inputStream) {

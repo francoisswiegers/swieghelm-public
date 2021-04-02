@@ -15,9 +15,9 @@ import java.util.function.Function;
 /**
  * A set of very simple, straightforward type conversions to Java common types.
  */
-public class SimpleJavaStandardTypeConversions implements TypeConversion {
+public class JavaStandardScalarConversions implements TypeConversion {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SimpleJavaStandardTypeConversions.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JavaStandardScalarConversions.class);
 
     private static final Map<TypeLiteral<?>, Function<Object, Object>> CONVERTERS = new HashMap<>();
 
