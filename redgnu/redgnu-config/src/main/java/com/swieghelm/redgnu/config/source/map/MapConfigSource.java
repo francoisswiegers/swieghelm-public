@@ -1,10 +1,9 @@
-package com.swieghelm.redgnu.config.source.impl;
+package com.swieghelm.redgnu.config.source.map;
 
 import com.swieghelm.redgnu.config.source.ConfigSource;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class MapConfigSource implements ConfigSource {
 

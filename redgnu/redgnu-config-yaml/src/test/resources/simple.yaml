@@ -1,0 +1,4 @@
+boolean: true
+integer: 3
+float: 3.14
+text: This is a text sequence

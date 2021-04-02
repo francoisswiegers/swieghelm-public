@@ -8,7 +8,7 @@ import com.swieghelm.redgnu.config.discovery.reflections.ReflectionsInjectionDis
 import com.swieghelm.redgnu.config.extension.vanilla.Config;
 import com.swieghelm.redgnu.config.extension.vanilla.DefaultDescriptionDiscovery;
 import com.swieghelm.redgnu.config.inject.ConfigModule;
-import com.swieghelm.redgnu.config.source.impl.MapConfigSource;
+import com.swieghelm.redgnu.config.source.map.MapConfigSource;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
