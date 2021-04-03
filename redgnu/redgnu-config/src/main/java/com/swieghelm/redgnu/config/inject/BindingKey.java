@@ -26,7 +26,7 @@ public class BindingKey {
 
     @Override
     public boolean equals(final Object obj) {
-        return obj == this || (obj instanceof BindingKey && isEqual((BindingKey)obj));
+        return obj == this || (obj instanceof BindingKey && isEqual((BindingKey) obj));
     }
 
     private boolean isEqual(final BindingKey obj) {
@@ -37,5 +37,10 @@ public class BindingKey {
     @Override
     public int hashCode() {
         return Objects.hash(targetType, annotation);
+    }
+
+    @Override
+    public String toString() {
+        return targetType + "[annotation=" + annotation + ']';
     }
 }

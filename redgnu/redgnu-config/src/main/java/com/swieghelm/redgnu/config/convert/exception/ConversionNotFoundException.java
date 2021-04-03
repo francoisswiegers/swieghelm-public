@@ -1,10 +1,9 @@
 package com.swieghelm.redgnu.config.convert.exception;
 
 import com.google.inject.TypeLiteral;
-import com.swieghelm.redgnu.config.ConfigException;
 import com.swieghelm.redgnu.config.convert.TypeConversion;
 
-public class ConversionNotFoundException extends ConfigException {
+public class ConversionNotFoundException extends TypeConversionException {
 
     private final TypeConversion typeConversion;
     private final Object rawValue;
