@@ -86,6 +86,8 @@ public class YamlExtensionTest {
                 put("3", "9");
             }
         }));
+        assertThat(configConsumer.level1Name, equalTo("Level-1-Name"));
+        assertThat(configConsumer.level2Surname, equalTo("Level-2-Surname"));
     }
 
     public static class ConfigConsumer {
@@ -102,6 +104,8 @@ public class YamlExtensionTest {
         final Map<Integer, Integer> integerMap;
         final SortedMap<Integer, String> sortedMap;
         final NavigableMap<String, String> stringMap;
+        final String level1Name;
+        final String level2Surname;
 
         @Inject
         public ConfigConsumer(final @Config("text") String textValue,
@@ -115,7 +119,9 @@ public class YamlExtensionTest {
                               final @Config("list") SortedSet<Integer> sortedSet,
                               final @Config("map") Map<Integer, Integer> integerMap,
                               final @Config("map") SortedMap<Integer, String> sortedMap,
-                              final @Config("map") NavigableMap<String, String> stringMap) {
+                              final @Config("map") NavigableMap<String, String> stringMap,
+                              final @Config("level1.level1-name") String level1Name,
+                              final @Config("level1.level2.level2-surname") String level2Surname) {
             this.textValue = textValue;
             this.notSpecifiedTextValue = notSpecifiedTextValue;
             this.boolValue = boolValue;
@@ -128,6 +134,8 @@ public class YamlExtensionTest {
             this.integerMap = integerMap;
             this.sortedMap = sortedMap;
             this.stringMap = stringMap;
+            this.level1Name = level1Name;
+            this.level2Surname = level2Surname;
         }
 
     }

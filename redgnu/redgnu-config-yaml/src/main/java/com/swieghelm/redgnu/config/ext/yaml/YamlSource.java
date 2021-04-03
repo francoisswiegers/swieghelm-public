@@ -9,6 +9,8 @@ import java.util.Map;
 
 public class YamlSource implements ConfigSource {
 
+    private static final String REGEX_DOT = "\\.";
+
     private final Map<String, Object> document;
 
     public YamlSource(final InputStream inputStream) {
@@ -22,6 +24,15 @@ public class YamlSource implements ConfigSource {
 
     @Override
     public Object getConfiguredValue(final String key) {
-        return document.get(key);
+        // Snakeyaml stores nested properties as Maps within Maps. We have to deconstruct that into a key-value
+        final String[] keyComponents = key.split(REGEX_DOT);
+        Object value = document.get(keyComponents[0]);
+        for (int k = 1; k < keyComponents.length; k++) {
+            if (!(value instanceof Map<?, ?>)) {
+                return null;
+            }
+            value = ((Map<?, ?>)value).get(keyComponents[k]);
+        }
+        return value;
     }
 }
